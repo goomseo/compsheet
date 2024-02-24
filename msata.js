@@ -4,20 +4,20 @@ function makeStaffAssignmentTable() {
   targetSheet.getRange('A1:F').clear();
 
   // Adjust column widths for columns A to F
-  var columnWidths = [225, 75, 100, 50, 30, 75];
+  var columnWidths = [75, 225, 100, 50, 30, 75];
   for (var i = 0; i < columnWidths.length; i++) {
     targetSheet.setColumnWidth(i + 1, columnWidths[i]);
   }
 
   // Set text and background color for headers (A1:F1) and make the text bold
-  var headerValues = ['영문명', '국문명', 'WCA ID', '종목', '그룹', '스태프 업무'];
+  var headerValues = ['국문명', '영문명', 'WCA ID', '종목', '그룹', '스태프 업무'];
   var headerRange = targetSheet.getRange('A1:F1');
   headerRange.setValues([headerValues]);
   headerRange.setBackground('#E69138');
   headerRange.setFontWeight("bold");
 
   // Load data using the QUERY function into A2
-  var queryString = "=QUERY('3. 개인별 조&스탭'!A2:F, \"SELECT * WHERE F IS NOT NULL ORDER BY B\")";
+  var queryString = "=QUERY('3. 개인별 조&스탭'!A2:F, \"SELECT B, A, C, D, E, F WHERE F IS NOT NULL ORDER BY B\")";
   targetSheet.getRange('A2').setFormula(queryString);
 
   // Get the data range with values
