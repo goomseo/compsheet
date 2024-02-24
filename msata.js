@@ -74,7 +74,7 @@ function makeStaffAssignmentTable() {
   // Center-align text for the entire data range
   targetSheet.getRange(1, 1, lastRow, 6).setHorizontalAlignment("center");
 
-  // 조건부서식
+  // Set conditional formatting
   applyConditionalFormatting(targetSheet);
 }
 
