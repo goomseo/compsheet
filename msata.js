@@ -17,7 +17,7 @@ function makeStaffAssignmentTable() {
   headerRange.setFontWeight("bold");
 
   // Load data using the QUERY function into A2
-  var queryString = "=QUERY('3. 개인별 조&스탭'!A2:F, \"SELECT * WHERE F IS NOT NULL\")";
+  var queryString = "=QUERY('3. 개인별 조&스탭'!A2:F, \"SELECT * WHERE F IS NOT NULL ORDER BY B\")";
   targetSheet.getRange('A2').setFormula(queryString);
 
   // Get the data range with values
