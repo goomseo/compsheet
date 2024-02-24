@@ -1,6 +1,18 @@
 function makeStaffAssignmentTable() {
-  // Access the target sheet and clear existing content in A1:F
-  var targetSheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  // Edit sheets' name if needed
+  var dataSheet = "4. 개인별 조&스탭";
+  var resultSheet = "스태프 편성 메일 발송용";
+
+  // Access to the active spreadsheet
+  var spreadSheet = SpreadsheetApp.getActiveSpreadsheet();
+  
+  // Set the number format of the data sheet as text
+  var targetSheet = spreadSheet.getSheetByName(dataSheet);
+  var range = targetSheet.getDataRange();
+  range.setNumberFormat("@");
+
+  // Access to the result sheet and clear the datas
+  targetSheet = spreadSheet.getSheetByName(resultSheet);
   targetSheet.getRange('A1:F').clear();
 
   // Adjust column widths for columns A to F
@@ -17,7 +29,7 @@ function makeStaffAssignmentTable() {
   headerRange.setFontWeight("bold");
 
   // Load data using the QUERY function into A2
-  var queryString = "=QUERY('4. 개인별 조&스탭'!A2:F, \"SELECT B, A, C, D, E, F WHERE F IS NOT NULL ORDER BY B\")";
+  var queryString = "=QUERY('" + (dataSheet) + "'!A2:F, \"SELECT B, A, C, D, E, F WHERE F IS NOT NULL ORDER BY B\")";
   targetSheet.getRange('A2').setFormula(queryString);
 
   // Get the data range with values
