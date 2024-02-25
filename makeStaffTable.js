@@ -76,10 +76,9 @@ function makeStaffTable() {
 
   // 조건부서식
   applyConditionalFormatting(targetSheet);
-
-  var table = targetSheet.getDataRange().getValues();
-
-  return table;
+  
+  var ui = SpreadsheetApp.getUi();
+  ui.alert("생성 완료")
 }
 
 function setShadeAndBorder(targetSheet, startRow, endRow) {
@@ -134,4 +133,17 @@ function applyConditionalFormatting(targetSheet) {
     rulesF.push(ruleF);
     targetSheet.setConditionalFormatRules(rulesF);
   });
+}
+
+function clear() {
+  // Access to the active spreadsheet
+  var spreadSheet = SpreadsheetApp.getActiveSpreadsheet();
+
+  targetSheet = spreadSheet.getSheetByName("스태프 편성 메일 발송용");
+  targetSheet.getRange('A1:F').clear();
+
+  // Adjust column widths for columns A to F
+    for (var i = 0; i < 6; i++) {
+    targetSheet.setColumnWidth(i + 1, 100);
+  }
 }
