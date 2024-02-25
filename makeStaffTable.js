@@ -1,4 +1,4 @@
-function makeStaffAssignmentTable() {
+function makeStaffTable() {
   // Edit sheets' name if needed
   var dataSheet = "4. 개인별 조&스탭";
   var resultSheet = "스태프 편성 메일 발송용";
@@ -74,8 +74,12 @@ function makeStaffAssignmentTable() {
   // Center-align text for the entire data range
   targetSheet.getRange(1, 1, lastRow, 6).setHorizontalAlignment("center");
 
-  // Set conditional formatting
+  // 조건부서식
   applyConditionalFormatting(targetSheet);
+
+  var table = targetSheet.getDataRange().getValues();
+
+  return table;
 }
 
 function setShadeAndBorder(targetSheet, startRow, endRow) {
