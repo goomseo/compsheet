@@ -5,7 +5,7 @@
 
 ---
 
-# cleanUp.js Guideline
+# cleanUp.js Guideline
 1. 접수처 시트 Z1에 있는 "데이터 청소" 버튼을 클릭한다.
 
 # makeStaffTable.js Guideline
