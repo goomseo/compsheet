@@ -7,7 +7,7 @@ function cleanUp() {
   var lastRow = spreadsheet.getLastRow();
   for (var i = 7; i <= lastRow; i++) {
     var target = "BB" + i;
-    var formula = getFormulaString("BC" + i);
+    var formula = getFormulaString("BE" + i);
   
     spreadsheet.getRange(target).setFormula(formula);
 }
