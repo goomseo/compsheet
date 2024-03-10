@@ -7,7 +7,7 @@ function cleanUp() {
   var lastRow = spreadsheet.getLastRow();
   for (var i = 7; i <= lastRow; i++) {
     var target = "BB" + i;
-    var formula = getFormulaString("BE" + i);
+    var formula = getFormulaString("BE" + i, "BC" + i);
   
     spreadsheet.getRange(target).setFormula(formula);
 }
@@ -24,6 +24,6 @@ function cleanUp() {
   ui.alert("데이터 청소 완료");
 }
 
-function getFormulaString(cellReference) {
-  return '=IFERROR(VLOOKUP(' + cellReference + ',\'국문명 DB\'!$A$2:$C,3,FALSE), IF(AND(UNICODE("가") <= UNICODE(' + cellReference + '), UNICODE(' + cellReference + ') <= UNICODE("힣")),' + cellReference + ', IFERROR(IF(AND(UNICODE("가") <= UNICODE(INDEX(SPLIT(' + cellReference + ', "()", TRUE), 0, 2)), UNICODE(INDEX(SPLIT(' + cellReference + ', "()", TRUE), 0, 2)) <= UNICODE("힣")), INDEX(SPLIT(' + cellReference + ', "()", TRUE), 0, 2),"???"),"???")))';
+function getFormulaString(cellReference1, cellReference2) {
+  return '=IFERROR(VLOOKUP(' + cellReference1 + ',\'국문명 DB\'!$A$2:$C,3,FALSE), IF(AND(UNICODE("가") <= UNICODE(' + cellReference2 + '), UNICODE(' + cellReference2 + ') <= UNICODE("힣")),' + cellReference2 + ', IFERROR(IF(AND(UNICODE("가") <= UNICODE(INDEX(SPLIT(' + cellReference2 + ', "()", TRUE), 0, 2)), UNICODE(INDEX(SPLIT(' + cellReference2 + ', "()", TRUE), 0, 2)) <= UNICODE("힣")), INDEX(SPLIT(' + cellReference2 + ', "()", TRUE), 0, 2),"???"),"???")))';
 }
