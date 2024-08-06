@@ -99,7 +99,8 @@ function applyConditionalFormatting(targetSheet) {
     { text: 'B', color: '#6D9EEB' },
     { text: 'Y', color: '#FFD966' },
     { text: 'R', color: '#E06766' },
-    { text: 'G', color: '#93C47D' }
+    { text: 'G', color: '#93C47D' },
+    {text: 'final', color: '#A020F0'}
   ];
 
   conditionsE.forEach(function(condition) {
