@@ -2,12 +2,12 @@ function exportNameKr() {
   var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = spreadsheet.getActiveSheet();
 
-  var columnsToExport = [60, 54];
+  var columnsToExport = [60, 53];  // 53: BA, 60: BH
 
   var startRow = 6;
   var lastRowWithData = sheet.getLastRow();
   for (var i = startRow; i < lastRowWithData; i++) {
-    if (sheet.getRange(i, 60).isBlank()) {
+    if (sheet.getRange(i, 55).isBlank()) {
       lastRowWithData = i - 1;
       break;
     }
@@ -30,5 +30,6 @@ function exportNameKr() {
   var fileUrl = csvFile.getUrl();
   var downloadUrl = fileUrl.replace(/\/file\/d\/([^\/]+)\/.*/, "/uc?export=download&id=$1");
   
-  Logger.log("다운로드 링크: " + downloadUrl);
+  var ui = SpreadsheetApp.getUi();
+  ui.alert("다운로드 링크: " + downloadUrl);
 }
