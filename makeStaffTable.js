@@ -1,6 +1,6 @@
 function makeStaffTable() {
   // Edit sheets' name if needed
-  var dataSheet = "4. 개인별 조&스탭";
+  var dataSheet = "3. 개인별 조&스탭";
   var resultSheet = "스태프 편성 메일 발송용";
 
   // Access to the active spreadsheet
