@@ -1,6 +1,8 @@
 # compSheet
 
 - cleanUp.js: 접수처 시트에 남아있는 이전 데이터들을 삭제하고, 국문명 로드 함수를 재설정
+- exportNameKr.js: 참가자의 고유 번호와 국문명을 모아 pdf 파일로 추출
+- getMergedTable.js: 스태프 관리 시트에서 대회를 추가한 후 새로 적용하는 동적 vstack 함수 생성
 - makeStaffTable.js: 스태프 편성 안내 메일을 보낼 때 첨부하는 스태프 편성 pdf 파일을 생성
 
 ---
