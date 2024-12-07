@@ -93,7 +93,7 @@ for idx, competitor in enumerate(competitors):
     dict_pr = {}
     list_pr = competitor['personalBests']
     for pr in list_pr:
-        if pr['eventId'] in ['333bf', '333mbf', '444bf', '555bf']:
+        if pr['eventId'] in ['333fm', '333bf', '333mbf', '444bf', '555bf']:
             if pr['type'] == 'single':
                 dict_pr[pr['eventId']] = pr['best']
         else:
@@ -112,10 +112,13 @@ for idx, competitor in enumerate(competitors):
 
     # scrambles
     # 블라인드 종목은 NNN 데이터로 들어감
+    # fmc는 None 처리
     dict_corresponding_scramble = {'333bf': '333', '333mbf': '333', '444bf': '444', '555bf': '555'}
     keys_dict_corresponding_scramble = list(dict_corresponding_scramble.keys())
     for event in events:
-        if event in keys_dict_corresponding_scramble:
+        if event == '333fm':
+            data_csv[idx].append(None)
+        elif event in keys_dict_corresponding_scramble:
             if dict_corresponding_scramble[event] in keys_dict_pr:
                 data_csv[idx].append(dict_pr[dict_corresponding_scramble[event]])
             else:
