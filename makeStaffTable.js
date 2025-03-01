@@ -13,23 +13,23 @@ function makeStaffTable() {
 
   // Access to the result sheet and clear the datas
   targetSheet = spreadSheet.getSheetByName(resultSheet);
-  targetSheet.getRange('A1:F').clear();
+  targetSheet.getRange('A1:G').clear();
 
-  // Adjust column widths for columns A to F
-  var columnWidths = [75, 225, 100, 50, 30, 75];
+  // Adjust column widths for columns A to G
+  var columnWidths = [75, 225, 100, 50, 30, 75, 100];
   for (var i = 0; i < columnWidths.length; i++) {
     targetSheet.setColumnWidth(i + 1, columnWidths[i]);
   }
 
-  // Set text and background color for headers (A1:F1) and make the text bold
-  var headerValues = ['국문명', '영문명', 'WCA ID', '종목', '그룹', '스태프 업무'];
-  var headerRange = targetSheet.getRange('A1:F1');
+  // Set text and background color for headers (A1:G1) and make the text bold
+  var headerValues = ['국문명', '영문명', 'WCA ID', '종목', '그룹', '스태프', '참가자'];
+  var headerRange = targetSheet.getRange('A1:G1');
   headerRange.setValues([headerValues]);
   headerRange.setBackground('#E69138');
   headerRange.setFontWeight("bold");
 
   // Load data using the QUERY function into A2
-  var queryString = "=QUERY('" + (dataSheet) + "'!A2:F, \"SELECT B, A, C, D, E, F WHERE F IS NOT NULL ORDER BY B\")";
+  var queryString = "=QUERY('" + (dataSheet) + "'!A2:G, \"SELECT B, A, C, D, E, F, G WHERE F IS NOT NULL OR G IS NOT NULL ORDER BY B\")";
   targetSheet.getRange('A2').setFormula(queryString);
 
   // Get the data range with values
@@ -72,7 +72,7 @@ function makeStaffTable() {
   }
 
   // Center-align text for the entire data range
-  targetSheet.getRange(1, 1, lastRow, 6).setHorizontalAlignment("center");
+  targetSheet.getRange(1, 1, lastRow, 7).setHorizontalAlignment("center");
 
   // 조건부서식
   applyConditionalFormatting(targetSheet);
@@ -86,13 +86,14 @@ function setShadeAndBorder(targetSheet, startRow, endRow) {
     shadedRange.setBackground('#CCCCCC'); // Gray shading
 
     // Draw regular borders for the inner cells of the range
-    var borderRange = targetSheet.getRange(startRow, 1, endRow - startRow + 1, 6);
+    var borderRange = targetSheet.getRange(startRow, 1, endRow - startRow + 1, 7);
     borderRange.setBorder(true, null, true, null, null, null, "#000000", SpreadsheetApp.BorderStyle.SOLID_MEDIUM);
 }
 
 function applyConditionalFormatting(targetSheet) {
   var rangeE = targetSheet.getRange('E2:E');
   var rangeF = targetSheet.getRange('F2:F');
+  var rangeG = targetSheet.getRange('G2:G');
 
   // Define conditions for column E
   var conditionsE = [
@@ -134,6 +135,23 @@ function applyConditionalFormatting(targetSheet) {
     rulesF.push(ruleF);
     targetSheet.setConditionalFormatRules(rulesF);
   });
+
+    // Define conditions for column G
+  var conditionsG = [
+    { text: 'Competitor', color: '#c1b8e9' }
+  ];
+
+  conditionsG.forEach(function(condition) {
+    var ruleG = SpreadsheetApp.newConditionalFormatRule()
+      .whenTextContains(condition.text)
+      .setBackground(condition.color)
+      .setRanges([rangeG])
+      .build();
+
+    var rulesG = targetSheet.getConditionalFormatRules();
+    rulesG.push(ruleG);
+    targetSheet.setConditionalFormatRules(rulesG);
+  });
 }
 
 function clear() {
@@ -141,10 +159,10 @@ function clear() {
   var spreadSheet = SpreadsheetApp.getActiveSpreadsheet();
 
   targetSheet = spreadSheet.getSheetByName("스태프 편성 메일 발송용");
-  targetSheet.getRange('A1:F').clear();
+  targetSheet.getRange('A1:G').clear();
 
-  // Adjust column widths for columns A to F
-    for (var i = 0; i < 6; i++) {
+  // Adjust column widths for columns A to G
+    for (var i = 0; i < 7; i++) {
     targetSheet.setColumnWidth(i + 1, 100);
   }
 }
